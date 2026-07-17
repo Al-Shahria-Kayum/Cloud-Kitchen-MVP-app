@@ -1,0 +1,112 @@
+{
+  "name": "Order",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "kitchen_id": {
+      "type": "string"
+    },
+    "kitchen_name": {
+      "type": "string"
+    },
+    "kitchen_owner_id": {
+      "type": "string"
+    },
+    "rider_id": {
+      "type": "string"
+    },
+    "rider_name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "rejected",
+        "preparing",
+        "ready",
+        "awaiting_rider",
+        "rider_assigned",
+        "picked_up",
+        "delivered"
+      ],
+      "default": "pending"
+    },
+    "item_total": {
+      "type": "number",
+      "default": 0
+    },
+    "final_price": {
+      "type": "number",
+      "default": 0
+    },
+    "platform_fee": {
+      "type": "number",
+      "default": 0
+    },
+    "rider_fee": {
+      "type": "number",
+      "default": 0
+    },
+    "delivery_address": {
+      "type": "string"
+    },
+    "delivery_lat": {
+      "type": "number"
+    },
+    "delivery_lng": {
+      "type": "number"
+    },
+    "refunded": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "customer_id",
+    "kitchen_id",
+    "status"
+  ],
+  "rls": {
+    "create": true,
+    "read": {
+      "$or": [
+        {
+          "data.customer_id": "{{user.id}}"
+        },
+        {
+          "data.kitchen_owner_id": "{{user.id}}"
+        },
+        {
+          "data.rider_id": "{{user.id}}"
+        },
+        {
+          "data.status": "awaiting_rider"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.customer_id": "{{user.id}}"
+        },
+        {
+          "data.kitchen_owner_id": "{{user.id}}"
+        },
+        {
+          "data.rider_id": "{{user.id}}"
+        },
+        {
+          "data.status": "awaiting_rider"
+        }
+      ]
+    },
+    "delete": false
+  }
+}
