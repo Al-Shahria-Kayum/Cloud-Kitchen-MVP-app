@@ -1,0 +1,24 @@
+{
+  "name": "Chat",
+  "type": "object",
+  "properties": {
+    "order_id": {
+      "type": "string"
+    },
+    "last_message": {
+      "type": "string"
+    },
+    "last_sender_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "order_id"
+  ],
+  "rls": {
+    "create": true,
+    "read": true,
+    "update": true,
+    "delete": false
+  }
+}
