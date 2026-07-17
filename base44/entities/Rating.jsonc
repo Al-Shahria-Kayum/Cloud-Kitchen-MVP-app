@@ -1,0 +1,41 @@
+{
+  "name": "Rating",
+  "type": "object",
+  "properties": {
+    "order_id": {
+      "type": "string"
+    },
+    "rated_user_id": {
+      "type": "string"
+    },
+    "rated_by_user_id": {
+      "type": "string"
+    },
+    "rating_type": {
+      "type": "string",
+      "enum": [
+        "kitchen",
+        "rider"
+      ]
+    },
+    "stars": {
+      "type": "number"
+    },
+    "review_text": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "order_id",
+    "rated_user_id",
+    "rated_by_user_id",
+    "rating_type",
+    "stars"
+  ],
+  "rls": {
+    "create": true,
+    "read": true,
+    "update": false,
+    "delete": false
+  }
+}
